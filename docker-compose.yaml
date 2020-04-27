@@ -8,10 +8,10 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: edvdbl
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
-      MYSQL_USER: edvdbl
-      MYSQL_PASSWORD: edvdbl
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
     networks:
       - wpsite
   # phpmyadmin
@@ -24,7 +24,7 @@ services:
       - '8080:80'
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: edvdbl 
+      MYSQL_ROOT_PASSWORD: password 
     networks:
       - wpsite
   # Wordpress
@@ -39,10 +39,10 @@ services:
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: edvdbl
+      WORDPRESS_DB_PASSWORD: wordpress
     networks:
       - wpsite
 networks:
   wpsite:
 volumes:
-  db_data:           
+  db_data:
