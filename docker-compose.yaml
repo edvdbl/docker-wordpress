@@ -1,0 +1,35 @@
+version: '3'
+
+services: 
+    #Database
+    db:
+        image: mysql:5.7
+        volumes:
+            - db_data:/var/lib/mysql
+        restart: always
+        environment: 
+            MYSQL_ROOT_PASSWORD: edvdbl
+            MYSQL_DATABASE: wordpress
+            MYSQL_user: edvdbl
+            MYSQL_PASSWORD: edvdbl
+        networks:
+            - wpsite
+    # WordPress
+    wordpress:
+        depends_on: 
+            - db
+            image: wordpress:latest
+            ports: 
+                - '8000:80'
+            restart: always
+            volumes: ['./:/var/www/html']
+            enviroment:
+                WORDPRESS_DB_HOST: db:3306
+                WORDPRESS_DB_user: edvdbl
+                WORDPRESS_DB_PASSWORD: edvdbl
+            networks: 
+                - wpsite
+networks:
+    wpsite:
+volumes:
+    db_data:                
